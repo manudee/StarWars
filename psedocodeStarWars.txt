@@ -1,0 +1,23 @@
+1. Create 4 objects for your characters.
+2. Create their individual properties as healthPoints, attackPower and counterAttackPower.
+3. Create a function to select a character.
+4. Create a function to select a defender.
+5. Crete a function to attack.
+6. Create a function to reset.
+
+
+
+
+--Details around game
+1. Create 4 objects for your characters.
+2. Create their properties as healthPoints, attackPower and counterAttackPower
+
+-- Clicking on characters 
+3. Create on click event handlers for each of the characters
+4. When you click on character1 , you should append the remaining characters to the enemies area
+5. When you click on character2 , you should append the remaining characters to the enemies area
+6. When you click on character3 , you should append the remaining characters to the enemies area
+7. When you click on character4 , you should append the remaining characters to the enemies area
+
+-- Clicking on chracters defender
+8. When you click on character 
