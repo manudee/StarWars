@@ -40,13 +40,21 @@ $(document).ready(function(){
 $(document).ready(function(){
  
 var attackCount = 0;
+var enemiesCount = 0;
+
 var characters  = {
      	    jon : {
  
                 "name":"jon",
                 "healthPoints": 120,
                 "attackPoints": 8,
-                "counterAttackPoints": 25
+                "counterAttackPoints": 25,
+
+                setPoints: function(){
+                console.log("HELLO POINTS " + this.healthPoints);
+                console.log("HELLO NAME " + this.name);
+                //console.log("healthPoints " + this.healthPoints );
+               }
             },
  
  
@@ -54,7 +62,13 @@ var characters  = {
             	"name":"daenerys",
             	"healthPoints": 100,
             	"attackPoints": 20,
-            	"counterAttackPoints": 10
+            	"counterAttackPoints": 10,
+
+                setPoints: function(){
+                console.log("HELLO POINTS " + this.healthPoints);
+                console.log("HELLO NAME " + this.name);
+                //console.log("healthPoints " + this.healthPoints );
+               }
             },
 
 
@@ -62,14 +76,26 @@ var characters  = {
             	"name":"nightKing",
             	"healthPoints": 150,
             	"attackPoints": 25,
-            	"counterAttackPoints": 15
+            	"counterAttackPoints": 15,
+
+                setPoints: function(){
+                console.log("HELLO POINTS " + this.healthPoints);
+                console.log("HELLO NAME " + this.name);
+                //console.log("healthPoints " + this.healthPoints );
+               }
             },
 
             cersei : {
             	"name":"cersei",
             	"healthPoints": 180,
             	"attackPoints": 10,
-            	"counterAttackPoints": 25
+            	"counterAttackPoints": 25,
+
+                setPoints: function(){
+                console.log("HELLO POINTS " + this.healthPoints);
+                console.log("HELLO NAME " + this.name);
+                //console.log("healthPoints " + this.healthPoints );
+               }
             }
         };
 
@@ -79,6 +105,13 @@ var characters  = {
 
         	$(this).siblings().appendTo("#enemies").removeClass("allChar").addClass("enemies");
         	console.log($(this).siblings());
+
+
+
+            //to count the number of enemies
+            enemiesCount = $(".enemies").length;
+            console.log("Enemies available to attack " + enemiesCount);
+
         	$("#yourCharacter").append(this);
 
                                 });//end of click event handler
@@ -147,44 +180,47 @@ var characters  = {
                 console.log("your char attack points " +characters[yourCharacter].attackPoints);
                 console.log("defender attack points " +characters[defender].counterAttackPoints);
 
+
+                $("#status1").html("You attacked " + characters[defender].name + " for damage of " + temp );
                 console.log("You attacked " + characters[defender].name + " for damage of " + temp );
                 console.log(characters[defender].name + " attacked you back " + " for damage of " + characters[defender].counterAttackPoints );
-
+                $("#status2").html(characters[defender].name + " attacked you back " + " for damage of " + characters[defender].counterAttackPoints );
                 console.log("attackCount " + attackCount);
 
-
-                if(characters[defender].healthPoints <= 0 && characters[yourCharacter].healthPoints >= 0){
-                	console.log("You win");
+                console.log("ENEMIES COUNT " + enemiesCount);
+                if(characters[defender].healthPoints <= 0 && characters[yourCharacter].healthPoints >= 0 && enemiesCount !=0){
+                	//console.log("You win");
                 	console.log("You have defeated " + characters[defender].name + "." + "You can choose to fight another enemy" );
-                		
+                	
                 	$("#defenderArea>img").hide();
                 	$(".enemiesArea>img").prop("disabled",false);
                      // and enemies not reached 0
                      //call for selection of another defender
-           		 }             
+                     enemiesCount--;
+                 }  
+                else if(characters[defender].healthPoints <= 0 && characters[yourCharacter].healthPoints >= 0 && enemiesCount === 0){
+                        console.log("YOU WIN!! GAME OVER")
+                          var buttonRestart = $('<input/>').attr({type:'button',  name: 'restartButton', value:'Restart Game'});
+                            $("#attack").hide();
+                            $("#restartGame").append(buttonRestart);
+                            console.log(buttonRestart);
+
+                }
+           		           
          				
 
                 else if(characters[defender].healthPoints >= 0 && characters[yourCharacter].healthPoints <= 0)
                 {   console.log("You lose");
                     
-                   // var #buttonRestart = $('<input/>').attr({type:'button', name: 'restartButton', value:'restartButton'});
-                   /*
-                        $("body").on("click", "#buttonRestart", function(){
-                        $("#defenderArea>img").show();
-                        //$("#defenderArea").appendTo("#yourCharacter");
-                        $("#yourCharacter>img").appendTo("#characters");
-                        $("#defenderArea>img").appendTo("#characters").removeClass("enemies").addClass("allChar");
-                    */
-
-                // });
+                  
+                  var buttonRestart = $('<input/>').attr({type:'button',  name: 'restartButton', value:'Restart Game'});
+                    $("#attack").hide();
+                    $("#restartGame").append(buttonRestart);
+                    console.log(buttonRestart);
 
                 }
 
-                 //else if(characters[yourCharacter].healthPoints < 0)
-                         //call for resetting the game
-                         //disable attack button
-                         //restart the game
-						//	}
+
 
 
         });
@@ -192,11 +228,15 @@ var characters  = {
 
 
         $("body").on("click", "#restartGame", function(){
+            attackCount = 0;
             $("#defenderArea>img").show();
+            $("#attack").show();
+            $("#status1").empty();
+            $("#status2").empty();
+            $("#restartGame").hide();
             //$("#defenderArea").appendTo("#yourCharacter");
             $("#yourCharacter>img").appendTo("#characters");
             $("#defenderArea>img").appendTo("#characters").removeClass("enemies").addClass("allChar");
-
 
         });
 
