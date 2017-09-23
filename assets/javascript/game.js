@@ -44,13 +44,13 @@ var characters  = {
         $("body").on("click", ".allChar", function(){
 
         	$(this).siblings().appendTo("#enemies").removeClass("allChar").addClass("enemies");
-        	console.log($(this).siblings());
+        	//console.log($(this).siblings());
 
 
 
             //to count the number of enemies
             enemiesCount = $(".enemies").length;//try doing -1
-            console.log("Enemies available to attack " + enemiesCount);
+            //console.log("Enemies available to attack " + enemiesCount);
 
         	$("#yourCharacter").append(this);
 
@@ -97,12 +97,12 @@ var characters  = {
 
 
                                                 
-                console.log("before the " + attackCount + " attack");
-                console.log("your char health points " + characters[yourCharacter].healthPoints);
-                console.log("defender health points " + characters[defender].healthPoints);
-                console.log("your char attack points " + characters[yourCharacter].attackPoints);
-                console.log("defender attack points " + characters[defender].counterAttackPoints);
-                console.log("attackCount Before " + attackCount);
+                //console.log("before the " + attackCount + " attack");
+                //console.log("your char health points " + characters[yourCharacter].healthPoints);
+                //console.log("defender health points " + characters[defender].healthPoints);
+                //console.log("your char attack points " + characters[yourCharacter].attackPoints);
+                //console.log("defender attack points " + characters[defender].counterAttackPoints);
+                //console.log("attackCount Before " + attackCount);
                 attackCount++;
                 temp = characters[yourCharacter].attackPoints * attackCount;              
                 //console.log("temp " + temp);
@@ -117,24 +117,24 @@ var characters  = {
                 //do this to print the points on the image Div
                // ("#jon").append("<br>" + characters[yourCharacter].healthPoints + "<br>");
 
-                console.log("State after the " + attackCount + " attack");
-                console.log("your char health points " + characters[yourCharacter].healthPoints);
-                console.log("defender health points " + characters[defender].healthPoints);
+                //console.log("State after the " + attackCount + " attack");
+                //console.log("your char health points " + characters[yourCharacter].healthPoints);
+                //console.log("defender health points " + characters[defender].healthPoints);
                 //console.log(temp);
-                console.log("your char attack points " +characters[yourCharacter].attackPoints);
-                console.log("defender counter attack points " +characters[defender].counterAttackPoints);
+                //console.log("your char attack points " +characters[yourCharacter].attackPoints);
+                //console.log("defender counter attack points " +characters[defender].counterAttackPoints);
 
                 $("#status3").html("Your character healthpoints are " + characters[yourCharacter].healthPoints);
                 $("#status4").html("Your defender's healthpoints are  " + characters[defender].healthPoints);
 
 
                 $("#status1").html("You attacked " + characters[defender].name + " for damage of " + temp );
-                console.log("You attacked " + characters[defender].name + " for damage of " + temp );
-                console.log(characters[defender].name + " attacked you back " + " for damage of " + characters[defender].counterAttackPoints );
+                //console.log("You attacked " + characters[defender].name + " for damage of " + temp );
+                //console.log(characters[defender].name + " attacked you back " + " for damage of " + characters[defender].counterAttackPoints );
                 $("#status2").html(characters[defender].name + " attacked you back " + " for damage of " + characters[defender].counterAttackPoints );
-                console.log("attackCount " + attackCount);
+                //console.log("attackCount " + attackCount);
 
-                console.log("ENEMIES COUNT " + enemiesCount);
+                //console.log("ENEMIES COUNT " + enemiesCount);
 
                 if(characters[defender].healthPoints <= 0 && characters[yourCharacter].healthPoints >= 0){
                 	//console.log("You win");
@@ -146,18 +146,18 @@ var characters  = {
 
                      $("#status1").html("You have defeated " + characters[defender].name + "." + " You can choose to fight another enemy");
 
-                	console.log("You have defeated " + characters[defender].name + "." + " You can choose to fight another enemy" );
+                	//console.log("You have defeated " + characters[defender].name + "." + " You can choose to fight another enemy" );
                 	 
 
                 	$("#defenderArea>img").hide();
                 	$(".enemiesArea>img").prop("disabled",false);
 
                     if( enemiesCount=== 0 ){
-                             console.log("YOU WIN!! GAME OVER")
+                             //console.log("YOU WIN!! GAME OVER")
                              var buttonRestart = $('<input/>').attr({type:'button',  name: 'restartButton', value:'Restart Game'});
                             $("#attack").hide();
                             $("#restartGame").append(buttonRestart);
-                            console.log(buttonRestart); 
+                            //console.log(buttonRestart); 
 
                     }
                      // and enemies not reached 0
@@ -168,13 +168,13 @@ var characters  = {
          				
 
                 else if(characters[defender].healthPoints >= 0 && characters[yourCharacter].healthPoints <= 0)
-                {   console.log("You lose");
+                {   //console.log("You lose");
                     
                   
                     var buttonRestart = $('<input/>').attr({type:'button',  name: 'restartButton', value:'Restart Game'});
                     $("#attack").hide();
                     $("#restartGame").append(buttonRestart);
-                    console.log(buttonRestart);
+                    //console.log(buttonRestart);
 
                 }
 
