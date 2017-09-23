@@ -2,9 +2,9 @@ body{
 
 	background-image: url('../images/GOT.jpg');
 	height: 100%;
-	  background-position: center;
+	background-position: center;
     background-repeat: no-repeat;
-     background-size: cover;
+    background-size: cover;
 }
 
 h1,h2{

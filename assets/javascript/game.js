@@ -40,7 +40,7 @@ $(document).ready(function(){
 $(document).ready(function(){
  
 var attackCount = 0;
-var enemiesCount = 0;
+var enemiesCount;
 
 var characters  = {
      	    jon : {
@@ -109,16 +109,17 @@ var characters  = {
 
 
             //to count the number of enemies
-            enemiesCount = $(".enemies").length;
+            enemiesCount = $(".enemies").length;//try doing -1
             console.log("Enemies available to attack " + enemiesCount);
 
         	$("#yourCharacter").append(this);
 
-                                });//end of click event handler
+            });//end of click event handler
                                
         $("body").on("click", ".enemies", function(){
 
         	$(this).appendTo('#defenderArea');
+            enemiesCount--;
         	$(".enemiesArea>img").prop("disabled",true);
    		});//end of click event handler
 
@@ -173,12 +174,18 @@ var characters  = {
 
                 characters[yourCharacter].healthPoints = characters[yourCharacter].healthPoints - characters[defender].counterAttackPoints;
 
+                //do this to print the points on the image Div
+               // ("#jon").append("<br>" + characters[yourCharacter].healthPoints + "<br>");
+
                 console.log("State after the " + attackCount + " attack");
                 console.log("your char health points " + characters[yourCharacter].healthPoints);
                 console.log("defender health points " + characters[defender].healthPoints);
                 //console.log(temp);
                 console.log("your char attack points " +characters[yourCharacter].attackPoints);
-                console.log("defender attack points " +characters[defender].counterAttackPoints);
+                console.log("defender counter attack points " +characters[defender].counterAttackPoints);
+
+                $("#status3").html("Your character healthpoints are " + characters[yourCharacter].healthPoints);
+                $("#status4").html("Your defender's healthpoints are  " + characters[defender].healthPoints);
 
 
                 $("#status1").html("You attacked " + characters[defender].name + " for damage of " + temp );
@@ -188,24 +195,34 @@ var characters  = {
                 console.log("attackCount " + attackCount);
 
                 console.log("ENEMIES COUNT " + enemiesCount);
-                if(characters[defender].healthPoints <= 0 && characters[yourCharacter].healthPoints >= 0 && enemiesCount !=0){
+                if(characters[defender].healthPoints <= 0 && characters[yourCharacter].healthPoints >= 0){
                 	//console.log("You win");
-                	console.log("You have defeated " + characters[defender].name + "." + "You can choose to fight another enemy" );
-                	
+
+                     $("#status1").empty();
+                     $("#status2").empty();
+                     $("#status3").empty();
+                     $("#status4").empty();
+
+                     $("#status1").html("You have defeated " + characters[defender].name + "." + " You can choose to fight another enemy");
+
+                	console.log("You have defeated " + characters[defender].name + "." + " You can choose to fight another enemy" );
+                	 
+
                 	$("#defenderArea>img").hide();
                 	$(".enemiesArea>img").prop("disabled",false);
-                     // and enemies not reached 0
-                     //call for selection of another defender
-                     enemiesCount--;
-                 }  
-                else if(characters[defender].healthPoints <= 0 && characters[yourCharacter].healthPoints >= 0 && enemiesCount === 0){
-                        console.log("YOU WIN!! GAME OVER")
-                          var buttonRestart = $('<input/>').attr({type:'button',  name: 'restartButton', value:'Restart Game'});
+
+                    if( enemiesCount=== 0 ){
+                             console.log("YOU WIN!! GAME OVER")
+                             var buttonRestart = $('<input/>').attr({type:'button',  name: 'restartButton', value:'Restart Game'});
                             $("#attack").hide();
                             $("#restartGame").append(buttonRestart);
-                            console.log(buttonRestart);
+                            console.log(buttonRestart); 
 
-                }
+                    }
+                     // and enemies not reached 0
+                     //call for selection of another defender
+                     //enemiesCount--;
+                 }  
            		           
          				
 
@@ -213,19 +230,38 @@ var characters  = {
                 {   console.log("You lose");
                     
                   
-                  var buttonRestart = $('<input/>').attr({type:'button',  name: 'restartButton', value:'Restart Game'});
+                    var buttonRestart = $('<input/>').attr({type:'button',  name: 'restartButton', value:'Restart Game'});
                     $("#attack").hide();
                     $("#restartGame").append(buttonRestart);
                     console.log(buttonRestart);
 
                 }
 
+                else if(characters[defender].healthPoints <= 0 && characters[yourCharacter].healthPoints <= 0)//when your points go to 0 and defender's points go to zero in same attack
+                {
+
+                    $("#status1").empty();
+                    $("#status2").empty();
+                    $("#status3").empty();
+                    $("#status4").empty();
+
+                    $("#status1").html("Your healthPoints and your Defender's healthPoints are both below 0, please RESTART the game");
 
 
 
-        });
+                    var buttonRestart = $('<input/>').attr({type:'button',  id: 'restartButton', value:'Restart Game'});
+                    //buttonRestart.id = "setButton";
+
+                    $("#attack").hide();
+                    $("#restartGame").append(buttonRestart);
+                    //console.log(buttonRestart);
 
 
+                }
+
+});
+
+        
 
         $("body").on("click", "#restartGame", function(){
             attackCount = 0;
@@ -233,10 +269,22 @@ var characters  = {
             $("#attack").show();
             $("#status1").empty();
             $("#status2").empty();
-            $("#restartGame").hide();
-            //$("#defenderArea").appendTo("#yourCharacter");
+            $("#status3").empty();
+            $("#status4").empty();
+            
+          
+      
             $("#yourCharacter>img").appendTo("#characters");
+            $("#enemies>img").appendTo("#characters").removeClass("enemies").addClass("allChar");
             $("#defenderArea>img").appendTo("#characters").removeClass("enemies").addClass("allChar");
+       
+            $("#characters>img").prop("disabled",false);
+            $("#setButton").hide();
+            characters.jon.healthPoints =120;
+            characters.daenerys.healthPoints= 100;
+            characters.nightKing.healthPoints=150;
+            characters.cersei.healthPoints= 180;
+
 
         });
 
