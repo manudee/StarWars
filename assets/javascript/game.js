@@ -1,42 +1,4 @@
 
-
-/*
-$(document).ready(function(){
-
-		$(".allChar").on("click", function(){
-
-				var yourChar=$(this);
-				console.log(yourChar);
-
-
-				$("#yourCharacter").append(yourChar);
-
-				var enemiesChar=$("#characters>button").siblings();
-				console.log("siblings");
-
-				enemiesChar.appendTo("#enemies").removeClass("allChar").addClass("enemiesArea");
-				console.log("removed and added class");
-
-
-				$(".enemiesArea").on("click", function(){
-
-					var defenderChar = $(this);
-					console.log(defenderChar);
-					$("#defenderArea").append(defenderChar);
-					$(".enemiesArea>button").prop("disabled",true);
-
-				});
-
-
-			
-
-		});
-
-
-
-});*/
-
-
 $(document).ready(function(){
  
 var attackCount = 0;
@@ -48,13 +10,9 @@ var characters  = {
                 "name":"jon",
                 "healthPoints": 120,
                 "attackPoints": 8,
-                "counterAttackPoints": 25,
+                "counterAttackPoints": 25
 
-                setPoints: function(){
-                console.log("HELLO POINTS " + this.healthPoints);
-                console.log("HELLO NAME " + this.name);
-                //console.log("healthPoints " + this.healthPoints );
-               }
+          
             },
  
  
@@ -62,13 +20,7 @@ var characters  = {
             	"name":"daenerys",
             	"healthPoints": 100,
             	"attackPoints": 20,
-            	"counterAttackPoints": 10,
-
-                setPoints: function(){
-                console.log("HELLO POINTS " + this.healthPoints);
-                console.log("HELLO NAME " + this.name);
-                //console.log("healthPoints " + this.healthPoints );
-               }
+            	"counterAttackPoints": 10
             },
 
 
@@ -76,26 +28,14 @@ var characters  = {
             	"name":"nightKing",
             	"healthPoints": 150,
             	"attackPoints": 25,
-            	"counterAttackPoints": 15,
-
-                setPoints: function(){
-                console.log("HELLO POINTS " + this.healthPoints);
-                console.log("HELLO NAME " + this.name);
-                //console.log("healthPoints " + this.healthPoints );
-               }
+            	"counterAttackPoints": 15
             },
 
             cersei : {
             	"name":"cersei",
             	"healthPoints": 180,
             	"attackPoints": 10,
-            	"counterAttackPoints": 25,
-
-                setPoints: function(){
-                console.log("HELLO POINTS " + this.healthPoints);
-                console.log("HELLO NAME " + this.name);
-                //console.log("healthPoints " + this.healthPoints );
-               }
+            	"counterAttackPoints": 25
             }
         };
 
@@ -195,6 +135,7 @@ var characters  = {
                 console.log("attackCount " + attackCount);
 
                 console.log("ENEMIES COUNT " + enemiesCount);
+
                 if(characters[defender].healthPoints <= 0 && characters[yourCharacter].healthPoints >= 0){
                 	//console.log("You win");
 
@@ -249,6 +190,8 @@ var characters  = {
 
 
 
+                    //var button = document.createElement("button");
+                    //button.id = "buttonRestart";
                     var buttonRestart = $('<input/>').attr({type:'button',  id: 'restartButton', value:'Restart Game'});
                     //buttonRestart.id = "setButton";
 
@@ -279,7 +222,8 @@ var characters  = {
             $("#defenderArea>img").appendTo("#characters").removeClass("enemies").addClass("allChar");
        
             $("#characters>img").prop("disabled",false);
-            $("#setButton").hide();
+            //$("#setButton").hide();
+            $("#buttonRestart").remove();
             characters.jon.healthPoints =120;
             characters.daenerys.healthPoints= 100;
             characters.nightKing.healthPoints=150;
